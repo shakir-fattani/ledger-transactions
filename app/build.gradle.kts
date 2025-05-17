@@ -19,6 +19,36 @@ repositories {
 }
 
 dependencies {
+    // Logger
+    implementation("ch.qos.logback:logback-classic:1.4.11") // or latest version
+
+    // Ktor
+    implementation("io.ktor:ktor-server-core:2.3.6")
+    implementation("io.ktor:ktor-server-netty:2.3.6")
+    implementation("io.ktor:ktor-server-content-negotiation:2.3.6")
+    implementation("io.ktor:ktor-serialization-kotlinx-json:2.3.6")
+
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.7.3")
+
+    // Koin for DI
+    implementation("io.insert-koin:koin-ktor:3.4.3")
+
+    // Database (e.g. Exposed + PostgreSQL)
+    implementation("org.jetbrains.exposed:exposed-core:0.45.0")
+    implementation("org.jetbrains.exposed:exposed-dao:0.45.0")
+    implementation("org.jetbrains.exposed:exposed-jdbc:0.45.0")
+    implementation("org.postgresql:postgresql:42.7.1")
+
+    // HikariCP for connection pooling
+    implementation("com.zaxxer:HikariCP:5.1.0")
+
+    // Restate
+    // ksp("dev.restate:sdk-api-kotlin-gen:2.0.0")
+    implementation("dev.restate:sdk-kotlin-http:2.0.0")
+    // implementation("com.restatehq:restate-sdk:2.1.0") // or latest available
+
+
+
     // Use the Kotlin JUnit 5 integration.
     testImplementation("org.jetbrains.kotlin:kotlin-test-junit5")
 
@@ -31,6 +61,15 @@ dependencies {
     implementation(libs.guava)
 }
 
+configurations.all {
+    resolutionStrategy.eachDependency {
+        if (requested.group == "org.jetbrains.kotlinx" && requested.name.startsWith("kotlinx-coroutines")) {
+            useVersion("1.7.3")
+            because("Ensure all coroutines modules use the same version to avoid NoSuchMethodError")
+        }
+    }
+}
+
 // Apply a specific Java toolchain to ease working on different environments.
 java {
     toolchain {
@@ -40,7 +79,7 @@ java {
 
 application {
     // Define the main class for the application.
-    mainClass = "org.example.AppKt"
+    mainClass = "org.shakirfattani.AppKt"
 }
 
 tasks.named<Test>("test") {
