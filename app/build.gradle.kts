@@ -8,6 +8,8 @@
 plugins {
     // Apply the org.jetbrains.kotlin.jvm Plugin to add support for Kotlin.
     alias(libs.plugins.kotlin.jvm)
+    kotlin("plugin.serialization") version "2.1.20" // ✅ Required!
+
 
     // Apply the application plugin to add support for building a CLI application in Java.
     application
@@ -21,6 +23,8 @@ repositories {
 dependencies {
     // Logger
     implementation("ch.qos.logback:logback-classic:1.4.11") // or latest version
+    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.6.3") // or latest
+
 
     // Ktor
     implementation("io.ktor:ktor-server-core:2.3.6")
@@ -45,7 +49,7 @@ dependencies {
     // Restate
     // ksp("dev.restate:sdk-api-kotlin-gen:2.0.0")
     implementation("dev.restate:sdk-kotlin-http:2.0.0")
-    // implementation("com.restatehq:restate-sdk:2.1.0") // or latest available
+//     implementation("com.restatehq:restate-sdk:2.1.0") // or latest available
 
 
 
