@@ -9,6 +9,7 @@ plugins {
     // Apply the org.jetbrains.kotlin.jvm Plugin to add support for Kotlin.
     alias(libs.plugins.kotlin.jvm)
     kotlin("plugin.serialization") version "2.1.20" // ✅ Required!
+    id("com.google.devtools.ksp") version "2.0.0-1.0.21"
 
 
     // Apply the application plugin to add support for building a CLI application in Java.
@@ -18,6 +19,7 @@ plugins {
 repositories {
     // Use Maven Central for resolving dependencies.
     mavenCentral()
+    maven { url = uri("https://maven.restate.dev/releases") }
 }
 
 dependencies {
@@ -35,7 +37,9 @@ dependencies {
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.7.3")
 
     // Koin for DI
-    implementation("io.insert-koin:koin-ktor:3.4.3")
+//    implementation("io.insert-koin:koin-ktor:3.4.3")
+    implementation("io.insert-koin:koin-ktor:3.5.0")
+
 
     // Database (e.g. Exposed + PostgreSQL)
     implementation("org.jetbrains.exposed:exposed-core:0.45.0")
@@ -45,21 +49,19 @@ dependencies {
 
     // HikariCP for connection pooling
     implementation("com.zaxxer:HikariCP:5.1.0")
-
     // Restate
-    // ksp("dev.restate:sdk-api-kotlin-gen:2.0.0")
+    ksp("dev.restate:sdk-api-kotlin-gen:2.0.0")
+    annotationProcessor("dev.restate:sdk-api-gen:2.0.0")
     implementation("dev.restate:sdk-kotlin-http:2.0.0")
-//     implementation("com.restatehq:restate-sdk:2.1.0") // or latest available
-
-
 
     // Use the Kotlin JUnit 5 integration.
     testImplementation("org.jetbrains.kotlin:kotlin-test-junit5")
 
     // Use the JUnit 5 integration.
     testImplementation(libs.junit.jupiter.engine)
-
     testRuntimeOnly("org.junit.platform:junit-platform-launcher")
+    testImplementation("io.kotest:kotest-runner-junit5:5.7.2")
+    testImplementation("io.ktor:ktor-server-tests:2.3.4")
 
     // This dependency is used by the application.
     implementation(libs.guava)

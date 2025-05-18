@@ -8,6 +8,7 @@ import org.shakirfattani.api.module
 
 fun main() {
     println("Starting Application.......")
+
     embeddedServer(Netty, port = 8080, module = Application::module).start(wait = true)
 }
 

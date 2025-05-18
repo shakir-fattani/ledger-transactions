@@ -2,7 +2,6 @@ package org.shakirfattani.service.impl
 
 import org.shakirfattani.service.FeeService
 
-
 class FeeServiceImpl : FeeService {
     override fun calculateFee(type: String, amount: Double): Pair<Double, String> {
         val rate = when (type) {

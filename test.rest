@@ -6,7 +6,7 @@ Content-Type: application/json
 
 {
     "transaction_id": "txn_001",
-    "amount": 98000,
+    "amount": 99999999,
     "asset": "USD",
     "asset_type": "FIAT",
     "type": "Mobile Top Up",
