@@ -20,5 +20,5 @@ data class TransactionFeeAndFeeDescription(
 interface FeeService {
 
     @Handler
-    suspend fun calculateFee(ctx: Context, request: TransactionAmountAndType): TransactionFeeAndFeeDescription
+    suspend fun calculateFee(ctx: Context?, request: TransactionAmountAndType): TransactionFeeAndFeeDescription
 }

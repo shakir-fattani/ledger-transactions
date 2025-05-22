@@ -47,6 +47,9 @@ dependencies {
     testImplementation("org.jetbrains.kotlin:kotlin-test-junit5")
     testImplementation(libs.junit.jupiter.engine)
     testRuntimeOnly("org.junit.platform:junit-platform-launcher")
+    testImplementation("io.kotest:kotest-runner-junit5:5.8.0")
+    testImplementation("io.kotest:kotest-assertions-core:5.8.0")
+    testImplementation("io.kotest:kotest-framework-engine:5.8.0")
 }
 
 configurations.all {
@@ -75,7 +78,6 @@ application {
     mainClass = "org.shakirfattani.AppKt"
 }
 
-//tasks.named<Test>("test") {
-//    // Use JUnit Platform for unit tests.
-//    useJUnitPlatform()
-//}
+tasks.test {
+    useJUnitPlatform()
+}

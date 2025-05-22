@@ -18,7 +18,6 @@ Content-Type: application/json
 
 #####
 POST http://127.0.0.1:8080/FeeService/calculateFee HTTP/1.1
-# Content-Type: application/x.restate.v1+json
 Content-Type: application/json
 
 {
